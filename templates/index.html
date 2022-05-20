@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Web Based Image Processor</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />        
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+<p><h1 align="center" style="color:#5bc0de;" >WEB BASED IMAGE PROCESSOR</h1></p>
+<div class="container">
+<div class="row">
+    <h3>Select an image to upload</h3>
+    <p>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </p>
+    {% if filename %}
+        <div>
+            <img src="{{ url_for('display_image', filename=filename) }}">
+        </div>
+    {% endif %}
+    <form method="post" action="/" enctype="multipart/form-data">
+        <dl>
+            <p>
+                <input type="file" name="file" class="form-control" autocomplete="off">
+            </p>
+        </dl>
+        <p>
+            <input type="submit" name="submit_button"  value="Upload" class="btn btn-info">&nbsp;&nbsp;
+        </p>
+
+        <h3>Select operation(s) to perform</h3>
+        <input type ="checkbox" value = "horizontal" name = "operation"> Flip Horizontal <br>
+        <input type ="checkbox" value = "vertical" name = "operation"> Flip Vertical<br>
+        <input type ="checkbox" value = "rotate" name = "operation"> Rotate +/- 
+            <input type="text" name="rotate_degree" value="Enter degree" size="13" onfocus="if (this.value == 'Enter degree') {this.value = '';}"><br>
+        <input type ="checkbox" value = "grayscale" name = "operation"> Fixed Grayscale<br>
+        <input type ="checkbox" value = "grayscale_value" name = "operation"> Specify Grayscale 
+            <input type="text" name="grayscale_value" value="Enter Grayscale value" size="20" onfocus="if (this.value == 'Enter Grayscale value') {this.value = '';}"> <br>
+        <input type ="checkbox" value = "saturate" name = "operation"> Saturate<br>
+        <input type ="checkbox" value = "desaturate" name = "operation"> Desaturate<br>
+        <input type ="checkbox" value = "resize_xy" name = "operation"> Resize(x,y) 
+            <input type="text" name="resize_x" value="Enter x" size="10" onfocus="if (this.value == 'Enter x') {this.value = '';}">
+            <input type="text" name="resize_y" value="Enter y" size="10" onfocus="if (this.value == 'Enter y') {this.value = '';}"><br>
+        <input type ="checkbox" value = "resize_percent" name = "operation"> Resize percentage  
+            <input type="text" name="resize_percentage" value="Enter percentage" size="17" onfocus="if (this.value == 'Enter percentage') {this.value = '';}"><br>
+        <input type ="checkbox" value = "thumbnail" name = "operation"> Generate Thumbnail <br>
+        <input type ="checkbox" value = "rotate_left" name = "operation"> Rotate Left <br>
+        <input type ="checkbox" value = "rotate_right" name = "operation"> Rotate Right <br>
+        <br>
+        <p>
+            <input type="submit" name="submit_button" value="Tranform" class="btn btn-info">&nbsp;&nbsp;
+        </p>
+    </form>
+</div>
+</div>
+</body>
+</html>
