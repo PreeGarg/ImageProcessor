@@ -1,5 +1,6 @@
 # ImageProcessor
 Image processor wherein user can upload images and perform combinations of operations
+Order is not maintained.
 Using Python and Flask
 UI build using HTML
 
